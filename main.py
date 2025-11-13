@@ -1,11 +1,19 @@
+#importing sys module
+import sys
+
 #importing number of words function from a seperate file
 from stats import number_of_words
 from stats import char_in_text
 from stats import dict_sort
 
 def main():
+    if len(sys.argv) != 2:
+        print("Usage: python3 main.py <path_to_book>")
+        sys.exit(1)
+    
     #turn text into a dict with characters and count
-    unsorted_dict = char_in_text(get_book_text("books/frankenstein.txt"))
+    unsorted_dict = char_in_text(get_book_text(sys.argv[1]))
+
     #sort the dict
     sorted_dict = dict_sort(unsorted_dict)
 
@@ -13,7 +21,7 @@ def main():
     print("============ BOOKBOT ============")
     print("Analyzing book found at books/frankenstein.txt...")
     print("----------- Word Count ----------")
-    print(number_of_words(get_book_text("books/frankenstein.txt")))
+    print(f"Found {number_of_words(get_book_text(sys.argv[1]))} total words")
     print('--------- Character Count -------')
 
     #loop to only print alphabets
